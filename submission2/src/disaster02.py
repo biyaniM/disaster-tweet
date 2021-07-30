@@ -233,8 +233,8 @@ for epoch in range(EPOCHS):
         torch.save(model.state_dict(),'best_model_state.bin')
         best_accuracy = train_acc
 #%%
-plt.plot(history['train_acc'], label='train accuracy')
-plt.plot(history['val_acc'], label='validation accuracy')
+plt.plot(torch.Tensor.cpu(history['train_acc']), label='train accuracy')
+plt.plot(torch.Tensor.cpu(history['val_acc']), label='validation accuracy')
 plt.title('Training history')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
@@ -268,4 +268,4 @@ predictions = pd.Series([p.item() for p in predictions])
 submission = pd.concat([df_test.id,predictions],axis=1)
 submission.rename(columns = {0:'target'}, inplace=True)
 # %%
-submission.to_csv('../submission2.csv',index=False)
+#submission.to_csv('../submission2.csv',index=False)
